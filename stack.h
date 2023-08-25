@@ -20,10 +20,16 @@ typedef struct stack_s
 } stack_t;
 
 /* Global Variable */
-extern stack_t *head;
+/*  Globales */
+typedef struct global
+{
+	FILE *file;
+	stack_t *head;
+} global_v;
+extern global_v sharedState;
 
 /* Function Prototypes */
-void push(int value);
+int push(int value);
 int pop(void);
 void print_stack(void);
 #endif /* STACK_H */
