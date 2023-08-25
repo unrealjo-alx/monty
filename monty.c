@@ -73,6 +73,8 @@ void process_instruction(char *opcode, char *arg, unsigned int line_number)
 	}
 	else if (!strcmp(opcode, "pall"))
 		print_stack();
+	else if (!strcmp(opcode, "pint"))
+		print_tstack();
 	else
 	{
 		fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
