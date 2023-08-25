@@ -5,5 +5,6 @@
 
 void process_instruction(char *opcode, char *arg, unsigned int line_number);
 void free_stack(stack_t **stack);
+void cleanup_and_exit();
 
 #endif /* MONTY_H */

@@ -66,26 +66,25 @@ void process_instruction(char *opcode, char *arg, unsigned int line_number)
 		if (arg == NULL)
 		{
 			fprintf(stderr, "L%u: usage: push integer\n", line_number);
-			fclose(sharedState.file);
-			free_stack(&sharedState.head);
-			exit(EXIT_FAILURE);
+			cleanup_and_exit();
 		}
 		if (push(atoi(arg)))
-		{
-			fclose(sharedState.file);
-			free_stack(&sharedState.head);
-			exit(EXIT_FAILURE);
-		}
+			cleanup_and_exit();
 	}
 	else if (!strcmp(opcode, "pall"))
-	{
 		print_stack();
-	}
 	else
 	{
 		fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
-		fclose(sharedState.file);
-		free_stack(&sharedState.head);
-		exit(EXIT_FAILURE);
+		cleanup_and_exit();
 	}
+}
+/**
+ * cleanup_and_exit - Clean up resources and exit with failure status
+ */
+void cleanup_and_exit()
+{
+	fclose(sharedState.file);
+	free_stack(&(sharedState.head));
+	exit(EXIT_FAILURE);
 }
