@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 	while (fgets(buffer, sizeof(buffer), sharedState.file))
 	{
 		line_number++;
-
+		trim_string(buffer);
 		opcode = strtok(buffer, " \t\n");
 		if (opcode == NULL || opcode[0] == '#')
 			continue;
@@ -70,6 +70,15 @@ void process_instruction(char *opcode, char *arg, unsigned int line_number)
 		}
 		if (push(atoi(arg)))
 			cleanup_and_exit();
+	}
+	else if (!strcmp(opcode, "pop"))
+	{
+		if (sharedState.head == NULL)
+		{
+			fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
+			cleanup_and_exit();
+		}
+		pop();
 	}
 	else if (!strcmp(opcode, "pall"))
 		print_stack();
