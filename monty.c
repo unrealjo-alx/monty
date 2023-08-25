@@ -83,7 +83,14 @@ void process_instruction(char *opcode, char *arg, unsigned int line_number)
 	else if (!strcmp(opcode, "pall"))
 		print_stack();
 	else if (!strcmp(opcode, "pint"))
+	{
+		if (sharedState.head == NULL)
+		{
+			fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+			cleanup_and_exit();
+		}
 		print_tstack();
+	}
 	else
 	{
 		fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
