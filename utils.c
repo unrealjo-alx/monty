@@ -1,4 +1,6 @@
 #include "stack.h"
+#include <ctype.h>
+#include <string.h>
 /**
  * free_stack - Frees a stack
  * @stack: Double pointer to the stack
@@ -19,4 +21,24 @@ void free_stack(stack_t **stack)
 	}
 
 	*stack = NULL;
+}
+/**
+ * trim_string - Trims leading and trailing whitespace from a string,
+ * @s: The string to be trimmed.
+ */
+void trim_string(char *s)
+{
+	size_t len;
+	char *end, *start = s;
+
+	while (*start && isspace((unsigned char)*start))
+		++start;
+
+	len = strlen(start);
+	memmove(s, start, len + 1);
+
+	end = s + len - 1;
+	while (end >= s && isspace((unsigned char)*end))
+		--end;
+	*(end + 1) = '\0';
 }
