@@ -32,4 +32,6 @@ extern global_v sharedState;
 int push(int value);
 int pop(void);
 void print_stack(void);
+void print_tstack(void);
+
 #endif /* STACK_H */

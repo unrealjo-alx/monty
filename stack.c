@@ -56,3 +56,11 @@ void print_stack(void)
 		temp = temp->next;
 	}
 }
+/**
+ * print_tstack - Prints the values at the top of the stack
+ */
+void print_tstack(void)
+{
+	if (sharedState.head != NULL)
+		printf("%d\n", sharedState.head->n);
+}
